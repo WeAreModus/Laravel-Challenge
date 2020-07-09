@@ -44,6 +44,7 @@
 1. Implement a form at the endpoint `/products/create` to insert new products. Only authenticated user may create new products. _(Refer to [Resource Controllers](https://laravel.com/docs/7.x/controllers#resource-controllers))_
 1. Implement a form at the endpoint `/products/{product}/edit` to update a product. Only authenticated user may edit products. _(Refer to [Resource Controllers](https://laravel.com/docs/7.x/controllers#resource-controllers))_
 1. Write tests which validate the functionality of at least the `/products` and `/products/{product}` endpoints
+1. Commit your work as a PR on the Github repo
 
 ## Challenge Goals
 
