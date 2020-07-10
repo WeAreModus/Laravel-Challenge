@@ -13,10 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/products');
+});
+Route::get('/home', function () {
+    return redirect('/products');
 });
 
-Auth::routes();
+Route::get('/products', 'ProductsController@index');
+Route::get('/products/{product}', 'ProductsController@show');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/products/{product}/edit', 'ProductsController@edit')->middleware('auth');;
+Route::post('/products/{product}/edit', 'ProductsController@update')->middleware('auth');;
+
+
+Auth::routes();
+//
