@@ -26,15 +26,21 @@
                             </svg>
                         </button>
                     </div>
+
                     <div class="flex-shrink-0 flex items-center">
                         <span class="text-white font-bold uppercase">Laravel App</span>
                     </div>
+
                     <div class="hidden md:ml-6 md:flex md:items-center">
                         <a href="{{ route('products.index') }}"
-                            class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Products</a>
+                            class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
+                            Products
+                        </a>
                     </div>
                 </div>
+
                 <div class="flex items-center">
+                    @if(user())
                     <div class="flex-shrink-0">
                         <span class="rounded-md shadow-sm">
                             <button type="button"
@@ -48,7 +54,10 @@
                             </button>
                         </span>
                     </div>
+                    @endif
+
                     <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
+                        @if(user())
                         <button
                             class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-gray-300 focus:outline-none focus:text-gray-500 focus:bg-gray-100 transition duration-150 ease-in-out"
                             aria-label="Notifications">
@@ -97,6 +106,20 @@
                                 </div>
                             </div>
                         </div>
+
+                        @else
+                            <div class="space-x-1 flex items-center">
+                                <a class="text-white bg-opacity-0 bg-gray-600 hover:bg-opacity-25 transition-all duration-150 px-4 py-2 rounded-lg"
+                                    href="{{ route('login') }}">
+                                    Sign in
+                                </a>
+
+                                <a class="text-white bg-opacity-0 bg-gray-600 hover:bg-opacity-25 transition-all duration-150 px-4 py-2 rounded-lg"
+                                    href="{{ route('register') }}">
+                                    Sign up
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -105,25 +128,21 @@
         <div x-description="Mobile menu, toggle classes based on menu state." x-state:on="Menu open"
             x-state:off="Menu closed" :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
             <div class="px-2 pt-2 pb-3 sm:px-3">
-                <a href="#"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Dashboard</a>
-                <a href="#"
-                    class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Team</a>
-                <a href="#"
-                    class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Projects</a>
-                <a href="#"
-                    class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Calendar</a>
+                <a href="{{ route('products.index') }}"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
+                    Products
+                </a>
             </div>
             <div class="pt-4 pb-3 border-t border-gray-700">
                 <div class="flex items-center px-5 sm:px-6">
                     <div class="flex-shrink-0">
                         <img class="h-10 w-10 rounded-full"
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
+                            src="https://www.gravatar.com/avatar/c542235c901d0c8d3a7fe9d82b4b64c3?s=200"
                             alt="">
                     </div>
                     <div class="ml-3">
-                        <div class="text-base font-medium leading-6 text-white">Tom Cook</div>
-                        <div class="text-sm font-medium leading-5 text-gray-400">tom@example.com</div>
+                        <div class="text-base font-medium leading-6 text-white">Marco Avila</div>
+                        <div class="text-sm font-medium leading-5 text-gray-400">@marcot89</div>
                     </div>
                 </div>
                 <div class="mt-3 px-2 sm:px-3">
@@ -142,9 +161,17 @@
 
     @if(isset($pageTitle))
         <header class="py-10">
-            <h1 class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-3xl leading-9 font-bold text-white">
-                {{ $pageTitle }}
-            </h1>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center space-x-4">
+                @if($withBackButton ?? false)
+                    <a href="{{ url()->previous() }}" class="h-6 w-6 text-white cursor-pointer opacity-50 hover:opacity-100 transition-opacity duration-200">
+                        <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                @endif
+
+                <h1 class="text-3xl leading-9 font-bold text-white">
+                    {{ $pageTitle }}
+                </h1>
+            </div>
         </header>
     @endif
 </div>

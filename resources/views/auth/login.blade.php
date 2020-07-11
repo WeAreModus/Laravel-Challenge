@@ -9,7 +9,7 @@
         Or
         <a href="{{ route('register') }}"
             class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-            register now
+            sign up now
         </a>
     </p>
 </div>
