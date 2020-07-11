@@ -14,7 +14,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'state'       => $faker->state,
         'city'        => $faker->city,
         'zip'         => $faker->postcode,
-        'country'     => $faker->country,
+        'country'     => countries()->map->name->random(),
         'photo'       => $faker->imageUrl(),
     ];
 });

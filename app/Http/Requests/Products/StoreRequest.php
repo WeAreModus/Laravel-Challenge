@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class StoreRequest extends FormRequest
             'state'       => 'required|max:255',
             'city'        => 'required|max:255',
             'zip'         => 'required|max:255',
-            'country'     => 'required|in:' . countries()->map->name->join(','),
+            'country'     => ['required', Rule::in(countries()->map->name->toArray())],
         ];
     }
 
