@@ -34,8 +34,8 @@
                                 <img class="h-10 w-10 rounded-lg" src="{{ $product->photo_url }}" alt="" />
                             </div>
                             <div class="ml-4">
-                                <div class="text-sm leading-5 font-medium text-gray-900">{{ $product->name }}
-                                </div>
+                                <a href="{{ route('products.show', $product) }}"
+                                    class="text-sm leading-5 font-medium text-primary-500 hover:text-primary-400 hover:underline">{{ $product->name }}</a>
                                 <div class="text-sm leading-5 text-gray-500 truncate max-w-xs">
                                     {{ $product->description }}</div>
                             </div>

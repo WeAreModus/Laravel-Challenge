@@ -18,6 +18,8 @@ Route::redirect('/', 'products');
 
 Auth::routes();
 
+Route::resource('products', 'ProductController', ['only' => ['index', 'show']]);
+
 Route::middleware('auth')->group(function () {
-    Route::resource('products', 'ProductController');
+    Route::resource('products', 'ProductController', ['only' => ['create', 'store', 'update', 'edit']]);
 });
