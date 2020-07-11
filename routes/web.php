@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', 'products');
 
 Auth::routes();
 
@@ -23,3 +22,5 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('products', 'ProductController', ['only' => ['index', 'show']]);
+
+Route::redirect('/', 'products');
