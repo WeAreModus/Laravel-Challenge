@@ -1,17 +1,17 @@
 @extends('layouts.app', ['pageTitle' => 'Products'])
 
 @section('actions')
-    @if(user())
-        <a href="{{ route('products.create') }}"
-            class="relative ml-auto inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-400 focus:outline-none focus:shadow-outline-indigo focus:border-primary-600 active:bg-primary-600 transition duration-150 ease-in-out">
-            <svg class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd"
-                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                    clip-rule="evenodd"></path>
-            </svg>
-            <span>New Product</span>
-        </a>
-    @endif
+@if(user())
+<a href="{{ route('products.create') }}"
+    class="relative ml-auto inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-400 focus:outline-none focus:shadow-outline-indigo focus:border-primary-600 active:bg-primary-600 transition duration-150 ease-in-out">
+    <svg class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+            clip-rule="evenodd"></path>
+    </svg>
+    <span>New Product</span>
+</a>
+@endif
 @endsection
 
 @section('content')
@@ -76,7 +76,16 @@
 
                     <td
                         class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                        <a href="{{ route('products.edit', $product) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        <div class="flex items-center space-x-3">
+                            <a href="{{ route('products.edit', $product) }}"
+                                class="text-indigo-600 hover:text-indigo-900">Edit</a>
+
+                            <form action="{{ route('products.destroy', $product) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button class="text-red-600 hover:text-red-900">Remove</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
