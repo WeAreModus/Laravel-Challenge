@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property int $id
@@ -45,6 +47,12 @@ class Product extends Model
 
     public function getPhotoUrlAttribute()
     {
-        return $this->photo ? url($this->photo) : null;
+        if (!$this->photo) {
+            return null;
+        }
+
+        return Str::of($this->photo)->startsWith('http')
+            ? $this->photo
+            : Storage::url($this->photo);
     }
 }

@@ -2,7 +2,7 @@
 
 @section('body')
 <div class="bg-gray-800 pb-32">
-    <nav x-data="{ open: false }">
+    <nav x-data="{ open: false }" class="z-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 border-b border-gray-700">
                 <div class="flex">
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="flex-shrink-0 flex items-center">
-                        <span class="text-white font-bold uppercase">Laravel App</span>
+                        <span class="text-white font-bold uppercase">Laravel Challenge</span>
                     </div>
 
                     <div class="hidden md:ml-6 md:flex md:items-center">
@@ -40,22 +40,6 @@
                 </div>
 
                 <div class="flex items-center">
-                    @if(user())
-                    <div class="flex-shrink-0">
-                        <span class="rounded-md shadow-sm">
-                            <button type="button"
-                                class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600 active:bg-indigo-600 transition duration-150 ease-in-out">
-                                <svg class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>New Product</span>
-                            </button>
-                        </span>
-                    </div>
-                    @endif
-
                     <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
                         @if(user())
                         <button
@@ -73,20 +57,22 @@
                             <div>
                                 <button @click="open = !open"
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
-                                    id="user-menu" aria-label="User menu" aria-haspopup="true" x-bind:aria-expanded="open">
+                                    id="user-menu" aria-label="User menu" aria-haspopup="true"
+                                    x-bind:aria-expanded="open">
                                     <img class="h-8 w-8 rounded-full"
                                         src="https://www.gravatar.com/avatar/c542235c901d0c8d3a7fe9d82b4b64c3?s=200"
                                         alt="">
                                 </button>
                             </div>
-                            <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state."
+                            <div x-show="open"
+                                x-description="Profile dropdown panel, show/hide based on dropdown state."
                                 x-transition:enter="transition ease-out duration-200"
                                 x-transition:enter-start="transform opacity-0 scale-95"
                                 x-transition:enter-end="transform opacity-100 scale-100"
                                 x-transition:leave="transition ease-in duration-75"
                                 x-transition:leave-start="transform opacity-100 scale-100"
                                 x-transition:leave-end="transform opacity-0 scale-95"
-                                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
+                                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-10"
                                 style="display: none;">
                                 <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
                                     aria-labelledby="user-menu">
@@ -108,17 +94,17 @@
                         </div>
 
                         @else
-                            <div class="space-x-1 flex items-center">
-                                <a class="text-white bg-opacity-0 bg-gray-600 hover:bg-opacity-25 transition-all duration-150 px-4 py-2 rounded-lg"
-                                    href="{{ route('login') }}">
-                                    Sign in
-                                </a>
+                        <div class="space-x-1 flex items-center">
+                            <a class="text-white bg-opacity-0 bg-gray-600 hover:bg-opacity-25 transition-all duration-150 px-4 py-2 rounded-lg"
+                                href="{{ route('login') }}">
+                                Sign in
+                            </a>
 
-                                <a class="text-white bg-opacity-0 bg-gray-600 hover:bg-opacity-25 transition-all duration-150 px-4 py-2 rounded-lg"
-                                    href="{{ route('register') }}">
-                                    Sign up
-                                </a>
-                            </div>
+                            <a class="text-white bg-opacity-0 bg-gray-600 hover:bg-opacity-25 transition-all duration-150 px-4 py-2 rounded-lg"
+                                href="{{ route('register') }}">
+                                Sign up
+                            </a>
+                        </div>
                         @endif
                     </div>
                 </div>
@@ -137,8 +123,7 @@
                 <div class="flex items-center px-5 sm:px-6">
                     <div class="flex-shrink-0">
                         <img class="h-10 w-10 rounded-full"
-                            src="https://www.gravatar.com/avatar/c542235c901d0c8d3a7fe9d82b4b64c3?s=200"
-                            alt="">
+                            src="https://www.gravatar.com/avatar/c542235c901d0c8d3a7fe9d82b4b64c3?s=200" alt="">
                     </div>
                     <div class="ml-3">
                         <div class="text-base font-medium leading-6 text-white">Marco Avila</div>
@@ -160,19 +145,30 @@
     </nav>
 
     @if(isset($pageTitle))
-        <header class="py-10">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center space-x-4">
-                @if($withBackButton ?? false)
-                    <a href="{{ url()->previous() }}" class="h-6 w-6 text-white cursor-pointer opacity-50 hover:opacity-100 transition-opacity duration-200">
-                        <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
-                    </a>
+    <header class="py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center">
+                @if($withBackButton ?? false || isset($backTo))
+                <a href="{{ $backTo ?? url()->previous() }}"
+                    class="h-6 w-6 mr-4 text-white cursor-pointer opacity-50 hover:opacity-100 transition-opacity duration-200">
+                    <svg fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
                 @endif
 
-                <h1 class="text-3xl leading-9 font-bold text-white">
+                <h1 class="text-3xl leading-9 font-bold text-white mr-4">
                     {{ $pageTitle }}
                 </h1>
+
+                @yield('actions')
             </div>
-        </header>
+
+            <x-notification />
+        </div>
+    </header>
     @endif
 </div>
 
