@@ -1,21 +1,31 @@
 @props([
     'name',
+    'options',
+    'labelBy' => 'name',
+    'trackBy' => 'id',
+    'defaultValue' => null,
     'value' => null,
     'placeholder' => null,
 ])
 
+@php
+$value = old($name) ?? $value ?? $defaultValue;
+@endphp
+
 <div>
     <div class="mt-1 relative rounded-md shadow-sm">
-        <input {{ $attributes }}
-            name="{{ $name }}"
-            placeholder="{{ $placeholder }}"
-            value="{{ old($name) ?? $value }}"
-            class="form-input block w-full pr-10
+        <select {{ $attributes }} id="{{ $name }}" name="{{ $name }}"
+            class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5
                 @error($name)
                 border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red
                 @enderror
-                sm:text-sm sm:leading-5"
-            />
+            ">
+            <option selected></option>
+            @foreach ($options as $option)
+                <option @if($option->{$trackBy} === $value) selected @endif
+                    value="{{ $option->{$trackBy} }}">{{ $option->{$labelBy} }}</option>
+            @endforeach
+        </select>
 
         @error($name)
             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
