@@ -9,7 +9,10 @@ module.exports = {
         }
     },
   },
-  variants: {},
+  variants: {
+    borderWidth: ['responsive', 'odd', 'even', 'hover', 'focus'],
+    backgroundColor: ['responsive', 'odd', 'even', 'hover', 'focus'],
+  },
   plugins: [
     require('@tailwindcss/ui'),
   ],
